@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %} Add Blog {% endblock %}
+
+{% block body %}
+<br><br><br>
+<h1>Add Post</h1>
+<div class="form-group">
+    <form method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button>Post</button>
+    </form>
+</div>
+
+
+<a href= "{% url 'home' %}">Back</a>
+{% endblock %}
