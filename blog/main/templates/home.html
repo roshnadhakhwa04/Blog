@@ -2,14 +2,20 @@
 
 {% block title %} Home {% endblock %}
 
-
-
 {% block body %}
 <br><br><br>
 <h1>Post</h1>
 {% for post in object_list %}
-    <li><a href="{% url 'article-detail' post.pk %}">{{ post.title }} - {{ post.author }} -<a href="{% url 'update_post' post.pk %}">Edit</a> <br> contact:{{post.author.email}}</a></li>
-    {{ post.body }}
+    <li><a href="{% url 'article_detail' post.pk %}">{{ post.title }} - {{ post.author }} - <br> contact:{{post.author.email}}</a></li>
+   <br>
+   <p>{{post.post_date}}</p>
+   <br>
+   <p>{{post.body|slice:":200"|safe}}</p>
+   {% if user.is_authenticated %}
+    <a href="{% url 'update_post' post.pk %}">Edit</a>
+    <a href="{% url 'delet_post' post.pk %}">Delet</a>
+   {% endif %} 
+  
 
 {% endfor %}
 {% endblock %}

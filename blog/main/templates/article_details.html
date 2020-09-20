@@ -1,13 +1,17 @@
 {% extends "base.html" %}
 
-{% block title %} Article {% endblock %}
+{% block title %}{{ post.title }} {% endblock %}
 
 {% block body %}
 <br><br><br>
 <h1>{{ post.title }}</h1>
 <small>By: {{post.author}}</small>
+<p>{{post.post_date}}</p>
 
-<h3>{{post.body}}</h3>
-
+<h3>{{post.body|safe}}</h3>
+{% if user.is_authenticated %}
+<a href="{% url 'delet_post' post.pk %}">Delet</a>
+<a href="{% url 'update_post' post.pk %}">Edit</a>
+{% endif %}
 <a href= "{% url 'home' %}">Back</a>
 {% endblock %}
